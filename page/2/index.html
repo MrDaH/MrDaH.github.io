@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>DaH's Blog</title><meta name="author" content="DaH"><meta name="copyright" content="DaH"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="DaH&#39;s Blog">
+<meta property="og:url" content="http://mrdah.github.io/page/2/index.html">
+<meta property="og:site_name" content="DaH&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://mrdah.github.io/img/touxiang.jpg">
+<meta property="article:author" content="DaH">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://mrdah.github.io/img/touxiang.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://mrdah.github.io/page/2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'DaH\'s Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/top1.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">DaH's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">DaH's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2026/02/15/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A81/" title="langGraph1.X快速入门 1"><img class="post-bg" src="https://pic.mac89.com/icon/202509/03114700_25dbf65456.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langGraph1.X快速入门 1"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/02/15/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A81/" title="langGraph1.X快速入门 1">langGraph1.X快速入门 1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-15T03:13:50.000Z" title="发表于 2026-02-15 11:13:50">2026-02-15</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/langGraph/">langGraph</a></span></div><div class="content">一、LangGraph 核心特性LangGraph 是一个极其灵活的框架，其核心设计理念可以概括为：它是一种用于构建智能体的“编程语言” 。 如同任何编程语言都包含数据、函数、控制流等基本要素一样，LangGraph 也提供了功能对等的抽象组件，使开发者能够以声明式的方式编排智能体工作流。其核心特性的对应关系如下：    编程语言要素 LangGraph 对应概念 说明    数据 (Data) 状态 (State) 工作流执行过程中传递和更新的信息载体。   函数 (Function) 节点 (Node) 对状态进行操作（如调用模型、执行工具）的基本单元。   控制逻辑 (Control Flow) 边 (Edge) 决定节点间执行顺序的逻辑，可以是条件分支或静态路径，支持串行与并行。   存储 (Storage) 检查点 &#x2F; 记忆 (Checkpointing &#x2F; Memory) 状态的持久化机制，允许工作流暂停、恢复或具有长期记忆。   中断 (Interrupt) 人在回路 (Human-in-the-Loop) 通过中断控制流，在关键环节引入人工审核...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/02/08/langChain%E4%B9%8B%E5%A4%9A%E6%A8%A1%E6%80%81RAG%E5%AE%9E%E6%88%983/" title="langChain之多模态RAG实战3"><img class="post-bg" src="https://pic.mac89.com/icon/202509/04095147_7eca05bbf0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langChain之多模态RAG实战3"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/02/08/langChain%E4%B9%8B%E5%A4%9A%E6%A8%A1%E6%80%81RAG%E5%AE%9E%E6%88%983/" title="langChain之多模态RAG实战3">langChain之多模态RAG实战3</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-08T10:23:04.000Z" title="发表于 2026-02-08 18:23:04">2026-02-08</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/langChain/">langChain</a></span></div><div class="content">前言上篇分享《LangChain之多模态RAG实战 2》中，系统探讨了如何基于 Qwen3-Omni 多模态大模型实现图片分析与音频处理的能力。作为多模态 RAG 系统的核心组成部分，对 PDF 文档的解析回答与引用溯源同样至关重要。 本文将重点介绍如何实现对上传 PDF 的结构化解析，构建具备引用溯源能力的问答系统。系统不仅能够依据文档内容进行准确回答，还将在回复中实时标注原始出处，方便用户进行信息追溯与验证。 学习前置要求：本文是系列的第三篇，强烈建议先掌握第一、二篇中介绍的项目架构、环境配置和基础代码实现，这将有助于更好地理解本文的内容。 一、多模态PDF处理流程解析1.1 标准处理流程多模态PDF文档的处理通常遵循一套标准化的流程，下面将逐步解析各个环节的关键技术与实现思路： 1.1.1 文档内容提取根据PDF文档类型的不同，可以采用差异化的提取策略：  非影印版文档：使用PyMuPDF、PyPDF2等工具直接提取文本、图片和表格内容。图片在提取后通过URL占位符进行标记，保持文档结构的完整性。 影印版&#x2F;扫描版文档：借助DeepSeek-OCR、Paddle-O...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2026/02/07/langChain%E4%B9%8B%E5%A4%9A%E6%A8%A1%E6%80%81RAG%E5%AE%9E%E6%88%982/" title="langChain之多模态RAG实战2"><img class="post-bg" src="https://pic.mac89.com/icon/202508/28142416_fb7b2e2d3c.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langChain之多模态RAG实战2"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/02/07/langChain%E4%B9%8B%E5%A4%9A%E6%A8%A1%E6%80%81RAG%E5%AE%9E%E6%88%982/" title="langChain之多模态RAG实战2">langChain之多模态RAG实战2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-07T07:18:05.000Z" title="发表于 2026-02-07 15:18:05">2026-02-07</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/langChain/">langChain</a></span></div><div class="content">前言上篇分享《LangChain之多模态RAG实战1》中系统介绍了基于 LangChain 1.0 构建多模态 RAG 系统的整体架构设计，并完成了智能问答基础模块的开发，实现了对话历史管理、流式响应等核心功能。 本篇将在此基础上，进一步实现多模态 RAG 系统的两个重要扩展功能：图片内容分析与语音信息转写。通过引入对图像和语音数据的处理能力，让 RAG 系统真正具备理解和响应多种模态信息的能力。 学习前置要求：本文是系列的第二篇，强烈建议先掌握第一篇中介绍的项目架构、环境配置和基础代码实现，这将有助于更好地理解本文的内容。 一、图片分析功能实现1.1 传统图片分析系统建设思路在构建图片分析系统时，传统技术方案通常采用多阶段处理流程： 核心技术路径：  图像预处理：使用 OpenCV、PIL 等 Python 库对原始图像进行尺寸调整、色彩校正、噪声过滤等预处理操作 文字信息提取：通过 OCR 模型（如 MonkeyOCR、DeepSeek-OCR）识别并提取图像中的文本内容 语义理解分析：借助多模态大模型（如 Qwen-VL 系列）对图像进行深度语义解析，理解图像场景、对象关系...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/02/06/langChain%E4%B9%8B%E5%A4%9A%E6%A8%A1%E6%80%81RAG%E5%AE%9E%E6%88%981/" title="langChain之多模态RAG实战1"><img class="post-bg" src="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langChain之多模态RAG实战1"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/02/06/langChain%E4%B9%8B%E5%A4%9A%E6%A8%A1%E6%80%81RAG%E5%AE%9E%E6%88%981/" title="langChain之多模态RAG实战1">langChain之多模态RAG实战1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-06T07:06:19.000Z" title="发表于 2026-02-06 15:06:19">2026-02-06</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/langChain/">langChain</a></span></div><div class="content">前言上篇分享《LangChain1.0速通指南3》中，深入解析了 LangChain 1.0 的 create_agent API，重点介绍了 MCP 协议工具集成、结构化输出、记忆管理和中间步中间件机制四大核心能力。通过高德地图 MCP 接入、动态模型选择等实战案例，展示了如何构建具备外部工具调用、记忆保持与流程可控的智能体应用。 掌握了基础知识后，要想检验自己对 LangChain 1.0 的理解，并进一步提升开发能力，最好的方式莫过于通过实际项目来锤炼技能。本文将从整体架构出发，系统介绍多模态 RAG 系统的核心组成与技术栈选择。后续文章将逐步拆解 LangChain + FastAPI 后端的关键模块，带领从零搭建完整的系统。 一、多模态RAG系统核心架构与技术栈首先介绍本系列项目的核心架构，本项目构建的是一个多模态RAG智能对话系统，支持文本、图像、音频、PDF等多种格式的输入，具备智能问答、图片分析、音频转写、PDF解析四大核心功能。为体现企业级智能体系统的开发标准，本项目采用前后端分离的现代化架构，帮助理解真实场景中的系统设计与开发流程。 在基于 LangChain...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2026/02/05/langChain%E4%B9%8BRAG%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langChain之RAG快速入门2"><img class="post-bg" src="https://pic.mac89.com/icon/202509/15110630_dacbcccc68.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langChain之RAG快速入门2"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/02/05/langChain%E4%B9%8BRAG%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langChain之RAG快速入门2">langChain之RAG快速入门2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-05T07:44:23.000Z" title="发表于 2026-02-05 15:44:23">2026-02-05</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/langChain/">langChain</a></span></div><div class="content">一、数据加载概念：在 RAG 系统中，数据加载是整个数据处理流水线的第一步，核心是将非结构化文档转换为程序可处理的结构化数据。 重要性：它是实现高质量检索与生成的前提，输入质量直接决定后续输出效果。 1.1 文档加载器主要功能  解析 PDF、Word、Markdown 等不同格式的原始文档，提取纯文本内容 在解析过程中同步抽取文档来源、页码、作者等关键元数据 将文本和元数据整理成统一的数据结构，方便后续切分、向量化和入库  1.2 使用 Unstructured 库Unstructured文档处理库  支持 PDF、Word、Excel、HTML、Markdown 等多种文档格式 可以自动识别标题、段落、表格、列表等文档结构，同时保留相应的元数据信息  使用 Unstructured 库加载并解析一个PDF文件 12345678910111213141516171819202122232425from unstructured.partition.auto import partition# PDF文件路径pdf_path = &quot;../../data/C2/pdf/r...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/3/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">DaH</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的小破站鸭！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/03/%E4%BB%80%E4%B9%88%E6%98%AFskills%EF%BC%9F/" title="什么是skills？"><img src="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="什么是skills？"/></a><div class="content"><a class="title" href="/2026/03/03/%E4%BB%80%E4%B9%88%E6%98%AFskills%EF%BC%9F/" title="什么是skills？">什么是skills？</a><time datetime="2026-03-03T03:22:42.000Z" title="发表于 2026-03-03 11:22:42">2026-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/02/FileSystem%E5%92%8CSandbox/" title="FileSystem和Sandbox"><img src="https://pic.mac89.com/icon/202509/15110630_dacbcccc68.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FileSystem和Sandbox"/></a><div class="content"><a class="title" href="/2026/03/02/FileSystem%E5%92%8CSandbox/" title="FileSystem和Sandbox">FileSystem和Sandbox</a><time datetime="2026-03-02T03:02:22.000Z" title="发表于 2026-03-02 11:02:22">2026-03-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/01/%E4%BB%80%E4%B9%88%E6%98%AFdeepAgents/" title="什么是 dppelAgent？"><img src="https://pic.mac89.com/icon/202509/04095147_7eca05bbf0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="什么是 dppelAgent？"/></a><div class="content"><a class="title" href="/2026/03/01/%E4%BB%80%E4%B9%88%E6%98%AFdeepAgents/" title="什么是 dppelAgent？">什么是 dppelAgent？</a><time datetime="2026-03-01T06:24:36.000Z" title="发表于 2026-03-01 14:24:36">2026-03-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/02/17/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langGraph1.X自动邮件处理智能体实战"><img src="https://pic.mac89.com/icon/202508/28142416_fb7b2e2d3c.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langGraph1.X自动邮件处理智能体实战"/></a><div class="content"><a class="title" href="/2026/02/17/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langGraph1.X自动邮件处理智能体实战">langGraph1.X自动邮件处理智能体实战</a><time datetime="2026-02-17T14:01:56.000Z" title="发表于 2026-02-17 22:01:56">2026-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langGraph1.X快速入门2"><img src="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langGraph1.X快速入门2"/></a><div class="content"><a class="title" href="/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langGraph1.X快速入门2">langGraph1.X快速入门2</a><time datetime="2026-02-16T05:49:02.000Z" title="发表于 2026-02-16 13:49:02">2026-02-16</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By DaH</span></div><div class="footer_custom_text">已经到底啦，可以点击右边的箭头直达顶部哦</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@3.0.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = [].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      const from = '出自 ' + data.from
+      typedJSFn.processSubtitle(data.hitokoto, [from])
+    })
+    .catch(err => {
+      console.error('Failed to get the Hitokoto API:', err)
+      typedJSFn.processSubtitle([])
+    })
+}
+typedJSFn.run(subtitleType)
+</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>

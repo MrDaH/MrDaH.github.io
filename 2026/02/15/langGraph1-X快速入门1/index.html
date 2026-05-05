@@ -1,0 +1,319 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>langGraph1.X快速入门 1 | DaH's Blog</title><meta name="author" content="DaH"><meta name="copyright" content="DaH"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、LangGraph 核心特性LangGraph 是一个极其灵活的框架，其核心设计理念可以概括为：它是一种用于构建智能体的“编程语言” 。 如同任何编程语言都包含数据、函数、控制流等基本要素一样，LangGraph 也提供了功能对等的抽象组件，使开发者能够以声明式的方式编排智能体工作流。其核心特性的对应关系如下：    编程语言要素 LangGraph 对应概念 说明    数据 (Data)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="langGraph1.X快速入门 1">
+<meta property="og:url" content="http://mrdah.github.io/2026/02/15/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A81/index.html">
+<meta property="og:site_name" content="DaH&#39;s Blog">
+<meta property="og:description" content="一、LangGraph 核心特性LangGraph 是一个极其灵活的框架，其核心设计理念可以概括为：它是一种用于构建智能体的“编程语言” 。 如同任何编程语言都包含数据、函数、控制流等基本要素一样，LangGraph 也提供了功能对等的抽象组件，使开发者能够以声明式的方式编排智能体工作流。其核心特性的对应关系如下：    编程语言要素 LangGraph 对应概念 说明    数据 (Data)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.mac89.com/icon/202509/03114700_25dbf65456.jpeg">
+<meta property="article:published_time" content="2026-02-15T03:13:50.000Z">
+<meta property="article:modified_time" content="2026-05-05T05:48:22.592Z">
+<meta property="article:author" content="DaH">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.mac89.com/icon/202509/03114700_25dbf65456.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "langGraph1.X快速入门 1",
+  "url": "http://mrdah.github.io/2026/02/15/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A81/",
+  "image": "https://pic.mac89.com/icon/202509/03114700_25dbf65456.jpeg",
+  "datePublished": "2026-02-15T03:13:50.000Z",
+  "dateModified": "2026-05-05T05:48:22.592Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "DaH",
+      "url": "http://MrDaH.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://mrdah.github.io/2026/02/15/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'langGraph1.X快速入门 1',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pic.mac89.com/icon/202509/03114700_25dbf65456.jpeg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">DaH's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">langGraph1.X快速入门 1</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">langGraph1.X快速入门 1</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2026-02-15T03:13:50.000Z" title="发表于 2026-02-15 11:13:50">2026-02-15</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/langGraph/">langGraph</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="一、LangGraph-核心特性"><a href="#一、LangGraph-核心特性" class="headerlink" title="一、LangGraph 核心特性"></a>一、LangGraph 核心特性</h3><p>LangGraph 是一个极其灵活的框架，其核心设计理念可以概括为：<strong>它是一种用于构建智能体的“编程语言”</strong> 。</p>
+<p>如同任何编程语言都包含数据、函数、控制流等基本要素一样，LangGraph 也提供了功能对等的抽象组件，使开发者能够以声明式的方式编排智能体工作流。其核心特性的对应关系如下：</p>
+<table>
+<thead>
+<tr>
+<th>编程语言要素</th>
+<th>LangGraph 对应概念</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>数据 (Data)</strong></td>
+<td><strong>状态 (State)</strong></td>
+<td>工作流执行过程中传递和更新的信息载体。</td>
+</tr>
+<tr>
+<td><strong>函数 (Function)</strong></td>
+<td><strong>节点 (Node)</strong></td>
+<td>对状态进行操作（如调用模型、执行工具）的基本单元。</td>
+</tr>
+<tr>
+<td><strong>控制逻辑 (Control Flow)</strong></td>
+<td><strong>边 (Edge)</strong></td>
+<td>决定节点间执行顺序的逻辑，可以是<strong>条件分支</strong>或<strong>静态路径</strong>，支持串行与并行。</td>
+</tr>
+<tr>
+<td><strong>存储 (Storage)</strong></td>
+<td><strong>检查点 &#x2F; 记忆 (Checkpointing &#x2F; Memory)</strong></td>
+<td>状态的持久化机制，允许工作流暂停、恢复或具有长期记忆。</td>
+</tr>
+<tr>
+<td><strong>中断 (Interrupt)</strong></td>
+<td><strong>人在回路 (Human-in-the-Loop)</strong></td>
+<td>通过中断控制流，在关键环节引入人工审核或干预的能力。</td>
+</tr>
+</tbody></table>
+<p>通过以上组件，LangGraph 使得构建一个具备复杂逻辑、可持续运行且支持人机协作的智能体系统变得直观且高效。</p>
+<h3 id="二、状态State和节点Node"><a href="#二、状态State和节点Node" class="headerlink" title="二、状态State和节点Node"></a>二、状态State和节点Node</h3><h4 id="2-1-状态State"><a href="#2-1-状态State" class="headerlink" title="2.1 状态State"></a>2.1 状态State</h4><p>LangGraph是一个状态图，状态可以理解为图的数据。在定义图之前首先应该定义一个状态作为初始值，在图的更新过程中状态值是可以被图更新并返回给用户的。</p>
+<p>图本身是无状态的，在定义图时，首先要定义图将操作的状态。这个状态由图中的所有节点共享。状态通常是一个Python数据结构。定义状态的方式可以采用类型化字典。比如下面代码就定义了包含名为<code>nList</code>字符串列表的状态值。当图被调用时，状态会被初始化，LangGraph运行时会选择一个节点来执行，然后它会提供当前状态，运行节点，最后更新状态再到结束。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">State</span>(<span class="title class_ inherited__">TypedDict</span>):</span><br><span class="line">    nlist: <span class="type">List</span>[<span class="built_in">str</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-节点"><a href="#2-2-节点" class="headerlink" title="2.2 节点"></a>2.2 节点</h3><p>在LangGraph中，节点的本质是一个函数。节点函数的输入参数是状态，输出则是对状态的更新。举例如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">node_a</span>(<span class="params">state: State</span>):</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">return</span> (&#123;<span class="string">&quot;nlist&quot;</span>:[note]&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>以上节点函数执行完成后会对字符串列表进行更新。State 可以被持久化（通过 Checkpointing 机制）。这意味着如果节点执行失败或工作流被中断，可以从上一个检查点恢复状态重新运行，保证了工作流的鲁棒性。</p>
+<h3 id="2-3-使用LangGraph构建简单图"><a href="#2-3-使用LangGraph构建简单图" class="headerlink" title="2.3 使用LangGraph构建简单图"></a>2.3 使用LangGraph构建简单图</h3><p>下面通过一个完整的代码示例，将 State 和 Node 的概念串联起来，构建一个最简单的单节点图。在开始之前，请确保已经安装了langgraph相关环境。如未安装，可以运行 <code>pip install -U langgraph</code>命令。</p>
+<ol>
+<li><p>导入依赖库</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langgraph.graph <span class="keyword">import</span> START, END, StateGraph</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建图表的第一步是定义一个<strong>State</strong>类，类型是字典。它包含一个字符串类型的列表,状态可以是一个Python数据类也可以是一个Pydantic基类模型，关于pydantic的使用可以参考的文章: <a target="_blank" rel="noopener" href="https://juejin.cn/post/7551665834499899444#heading-6" title="https:&#x2F;&#x2F;juejin.cn&#x2F;post&#x2F;7551665834499899444#heading-6">深入浅出LangGraph AI Agent智能体开发教程（六）—LangGraph 底层API入门</a>, 也可查看<a href="https://link.juejin.cn/?target=https://pydantic.com.cn/" title="https:&#x2F;&#x2F;pydantic.com.cn&#x2F;">pydantic官方文档</a>， 这里不加赘述了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">State</span>(<span class="title class_ inherited__">TypedDict</span>):</span><br><span class="line">    nList: <span class="type">List</span>[<span class="built_in">str</span>]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义节点，节点实际上就是Python函数，该函数接收状态，打印信息然后返回状态的更新。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">node_a</span>(<span class="params">state</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;noda_a接收到<span class="subst">&#123;state[<span class="string">&#x27;nList&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">    note = <span class="string">&quot;Hello, 我是节点a&quot;</span></span><br><span class="line">    <span class="keyword">return</span>(State(nList=[note]))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译状态图，将节点加入到图中，定义为”a”节点，同时添加从START节点到”a”节点的边，然后添加从”a”到END的边。这里的START和END都是LangGraph定义的常量节点，仅包含语义信息。最后编译图</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">builder = StateGraph(State)</span><br><span class="line">builder.add_node(<span class="string">&quot;a&quot;</span>, node_a)</span><br><span class="line">builder.add_edge(START, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;a&quot;</span>, END)</span><br><span class="line">graph = builder.<span class="built_in">compile</span>()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>接下来测试这个图，首先使用State初始化一个状态变量，然后通过<code>.invoke</code>方法运行图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">initial_state = State(</span><br><span class="line">    nList=[<span class="string">&quot;Hello Node a, how are you?&quot;</span>]</span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(graph.invoke(initial_state))</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>通过以上案例应该可以理解在定义图和状态时，图中所有节点可以共享相同的状态。</p>
+<h3 id="三、边"><a href="#三、边" class="headerlink" title="三、边"></a>三、边</h3><p>在定义了“数据”（State）和“操作”（Node）之后，接下来介绍<strong>边</strong>。<strong>边 (Edge)</strong>  是 LangGraph 中定义工作流<strong>执行逻辑</strong>的核心。它决定了节点之间的连接关系与执行顺序，是实现串行、并行、条件分支等复杂逻辑的关键。</p>
+<h4 id="3-1-普通边"><a href="#3-1-普通边" class="headerlink" title="3.1 普通边"></a>3.1 普通边</h4><p><strong>普通边（静态边）</strong>  用于连接两个节点，指定了确定无误的执行顺序。它是最简单的控制流，定义了工作流中“下一步该执行谁”。</p>
+<ul>
+<li><strong>串行执行</strong>：通过连续的普通边连接多个节点，形成一个线性的执行链。例如：<code>START -&gt; A -&gt; B -&gt; C -&gt; END</code>。</li>
+<li><strong>并行执行</strong>：一个节点可以同时拥有多个出边（<code>outgoing edges</code>），指向不同的后续节点。LangGraph 运行时会在当前节点完成后，<strong>同时触发</strong>所有这些后续节点的执行。</li>
+</ul>
+<h4 id="3-2-条件边"><a href="#3-2-条件边" class="headerlink" title="3.2 条件边"></a>3.2 条件边</h4><p>除普通边外，LangGraph还有另一种条件边。条件边允许工作流根据运行时状态<strong>动态决定</strong>下一步的执行路径。它需要一个<strong>路由函数</strong>，该函数接收当前状态，并选择下一个要执行的节点。条件边还有一个特殊情况是<strong>MapReduce</strong>, 它可以创建可变数量的下游节点，并且每个节点都传递了一个唯一值（之后也会讲到）。</p>
+<h4 id="3-3-Reducer详解"><a href="#3-3-Reducer详解" class="headerlink" title="3.3 Reducer详解"></a>3.3 Reducer详解</h4><p>当一个节点拥有多个出边（即触发了并行执行）时，多个后续节点可能<strong>同时更新 State 中的同一个字段</strong>。此时就会产生冲突：以谁的更新为准？默认情况下，节点的更新是<strong>覆盖式</strong>的。如果节点B和节点C并行执行，都尝试更新<code>state[‘messages’]</code>，后完成的节点会覆盖先完成节点的结果，导致数据丢失。</p>
+<p>为了更精确的控制，这时就需要用到<strong>Reducer（归约器）</strong> 来解决解决此问题。它是一个<strong>合并函数</strong>，定义了当多个更新同时作用于同一个状态字段时，应如何合并这些更新。下面的状态定义中的<code>operator.add</code>就是一个Reducer，它指定了列表状态应该是合并而不是覆写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> TypedDict, Annotated</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span>(<span class="title class_ inherited__">TypedDict</span>):</span><br><span class="line">    nList: Annotated[<span class="built_in">list</span>[<span class="built_in">str</span>], operator.add]</span><br></pre></td></tr></table></figure>
+
+<p>LangGraph 提供了一些开箱即用的 Reducer，下表列出了最常见的几种：</p>
+<table>
+<thead>
+<tr>
+<th>Reducer 函数</th>
+<th>导入来源</th>
+<th>适用数据类型</th>
+<th>主要行为</th>
+<th>典型应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>operator.add</code></strong></td>
+<td><code>operator</code> (Python标准库)</td>
+<td><code>int</code>, <code>float</code></td>
+<td>数值<strong>累加</strong></td>
+<td>计数器、计分器</td>
+</tr>
+<tr>
+<td><strong><code>operator.extend</code></strong></td>
+<td><code>operator</code> (Python标准库)</td>
+<td><code>List[T]</code></td>
+<td>列表<strong>扩展</strong> (<code>list.extend</code>)</td>
+<td>收集多项结果，如搜索条目</td>
+</tr>
+<tr>
+<td><strong><code>operator.or_</code></strong></td>
+<td><code>operator</code> (Python标准库)</td>
+<td><code>Set[T]</code></td>
+<td>集合<strong>取并集</strong>，自动去重</td>
+<td>收集标签、唯一ID集合</td>
+</tr>
+<tr>
+<td><strong><code>update_dict</code></strong></td>
+<td><code>langgraph.utils</code></td>
+<td><code>Dict</code></td>
+<td><strong>合并字典</strong>，新值覆盖旧键</td>
+<td>更新配置或元数据</td>
+</tr>
+</tbody></table>
+<p>除了使用内置的Reducer外，开发者甚至可以自定义reducer进行处理。Reducer就是一个合并函数，该函数接收当前值和新传入值作为参数，并在函数中定义处理逻辑。以下是一个自定义Reducer的代码示例：该函数合并新值和旧值并返回去重后结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> TypedDict, <span class="type">List</span>, Annotated</span><br><span class="line"><span class="keyword">from</span> langgraph.graph <span class="keyword">import</span> START, END, StateGraph</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">deduplicate_merge</span>(<span class="params">old_list: <span class="type">List</span>[<span class="built_in">str</span>], new_list: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;自定义Reducer：合并列表并去重&quot;&quot;&quot;</span></span><br><span class="line">    combined = old_list + new_list</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">dict</span>.fromkeys(combined)) <span class="comment"># 保持顺序的去重</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyState</span>(<span class="title class_ inherited__">TypedDict</span>):</span><br><span class="line">    unique_items: Annotated[<span class="type">List</span>[<span class="built_in">str</span>], deduplicate_merge]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> TypedDict, <span class="type">List</span>, Annotated</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span>(<span class="title class_ inherited__">TypedDict</span>):</span><br><span class="line">    unique_items: Annotated[<span class="type">List</span>[<span class="built_in">str</span>], deduplicate_merge]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_a</span>(<span class="params">state: State</span>) -&gt; State:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Adding &#x27;A&#x27; to <span class="subst">&#123;state[<span class="string">&#x27;unique_items&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> State(unique_items=[<span class="string">&quot;A&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_A_extra</span>(<span class="params">state: State</span>) -&gt; State:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Adding &#x27;A&#x27; to <span class="subst">&#123;state[<span class="string">&#x27;unique_items&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> State(unique_items=[<span class="string">&quot;A&quot;</span>])</span><br><span class="line"></span><br><span class="line">builder = StateGraph(State)</span><br><span class="line"></span><br><span class="line">builder.add_node(<span class="string">&quot;a&quot;</span>, node_a)</span><br><span class="line">builder.add_node(<span class="string">&quot;a_extra&quot;</span>, node_A_extra)</span><br><span class="line"></span><br><span class="line">builder.add_edge(START, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;a_extra&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;a_extra&quot;</span>, END)</span><br><span class="line"></span><br><span class="line">graph = builder.<span class="built_in">compile</span>()</span><br><span class="line"></span><br><span class="line">initial_state = State(</span><br><span class="line">    unique_items = [<span class="string">&#x27;Initial String&#x27;</span>]</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(graph.invoke(initial_state))</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="3-4-探索LangGraph边的并行与数据共享"><a href="#3-4-探索LangGraph边的并行与数据共享" class="headerlink" title="3.4 探索LangGraph边的并行与数据共享"></a>3.4 探索LangGraph边的并行与数据共享</h4><p>接下来将构建一个工作流，来帮助直观理解<strong>并行执行</strong>与<strong>全局状态共享</strong>。</p>
+<ol>
+<li><p>第一步同样的需要定义状态，不同的是这里的状态需要用reducer来指明列表的状态是累加而不是覆盖原来的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> TypedDict, <span class="type">List</span>, Annotated</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span>(<span class="title class_ inherited__">TypedDict</span>):</span><br><span class="line">    nList: Annotated[<span class="type">List</span>[<span class="built_in">str</span>], operator.add]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下一步来定义节点函数，每个节点都接收状态，并返回对<code>nList</code>字段的更新</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">node_a</span>(<span class="params">state: State</span>) -&gt; State:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Adding &#x27;A&#x27; to <span class="subst">&#123;state[<span class="string">&#x27;nList&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> State(nList=[<span class="string">&quot;A&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_b</span>(<span class="params">state: State</span>) -&gt; State:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Adding &#x27;B&#x27; to <span class="subst">&#123;state[<span class="string">&#x27;nList&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> State(nList=[<span class="string">&quot;B&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_c</span>(<span class="params">state: State</span>) -&gt; State:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Adding &#x27;C&#x27; to <span class="subst">&#123;state[<span class="string">&#x27;nList&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> State(nList=[<span class="string">&quot;C&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_bb</span>(<span class="params">state: State</span>) -&gt; State:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Adding &#x27;BB&#x27; to <span class="subst">&#123;state[<span class="string">&#x27;nList&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> State(nList=[<span class="string">&quot;BB&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_cc</span>(<span class="params">state: State</span>) -&gt; State:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Adding &#x27;CC&#x27; to <span class="subst">&#123;state[<span class="string">&#x27;nList&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> State(nList=[<span class="string">&quot;CC&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_d</span>(<span class="params">state: State</span>) -&gt; State:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Adding &#x27;D&#x27; to <span class="subst">&#123;state[<span class="string">&#x27;nList&#x27;</span>]&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> State(nList=[<span class="string">&quot;D&quot;</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用状态实例化StateGraph，然后添加定义好的节点并按照参考图中的边将不同的节点连接起来，最后编译图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">builder = StateGraph(State)</span><br><span class="line"></span><br><span class="line">builder.add_node(<span class="string">&quot;a&quot;</span>, node_a)</span><br><span class="line">builder.add_node(<span class="string">&quot;b&quot;</span>, node_b)</span><br><span class="line">builder.add_node(<span class="string">&quot;c&quot;</span>, node_c)</span><br><span class="line">builder.add_node(<span class="string">&quot;bb&quot;</span>, node_bb)</span><br><span class="line">builder.add_node(<span class="string">&quot;cc&quot;</span>, node_cc)</span><br><span class="line">builder.add_node(<span class="string">&quot;d&quot;</span>, node_d)</span><br><span class="line"></span><br><span class="line">builder.add_edge(START, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;a&quot;</span>, <span class="string">&quot;c&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;b&quot;</span>, <span class="string">&quot;bb&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;c&quot;</span>, <span class="string">&quot;cc&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;bb&quot;</span>, <span class="string">&quot;d&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;cc&quot;</span>, <span class="string">&quot;d&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;d&quot;</span>, END)</span><br><span class="line"></span><br><span class="line">graph = builder.<span class="built_in">compile</span>()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>提供一个初始状态来调用图表，先来思考一下最后的运行结果。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">initial_state = State(</span><br><span class="line">    nList = [<span class="string">&#x27;Initial String&#x27;</span>]</span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(graph.invoke(initial_state))</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li><strong>并行与合并</strong>：节点B和C在<strong>同一步骤</strong>中并行执行，它们都接收到了来自节点A更新后的状态 <code>[‘Initial‘， ‘A’]</code>。它们的更新（<code>”B”</code>和<code>”C”</code>）通过Reducer被<strong>追加</strong>到了<code>nList</code>中。</li>
+<li><strong>全局状态共享</strong>：节点BB和CC运行时，它能“看到”的状态包含了其上游节点B的更新<code>(‘B’)</code>，<strong>也包含了并行分支节点C的更新`(‘C’)</strong> 。这是因为LangGraph的状态是<strong>全局共享</strong>的，边只控制执行顺序，不隔离数据。</li>
+</ul>
+<h4 id="3-5-条件边"><a href="#3-5-条件边" class="headerlink" title="3.5 条件边"></a>3.5 条件边</h4><p>对于条件边这里直接通过代码讲解。</p>
+<ol>
+<li><p>定义状态</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langgraph.graph <span class="keyword">import</span> START, END, StateGraph</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> TypedDict, <span class="type">List</span>, Annotated</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span>(<span class="title class_ inherited__">TypedDict</span>):</span><br><span class="line">    nList: Annotated[<span class="type">List</span>[<span class="built_in">str</span>], operator.add]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义节点函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">node_a</span>(<span class="params">state: State</span>):</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_b</span>(<span class="params">state: State</span>):</span><br><span class="line">    <span class="keyword">return</span> State(nList=[<span class="string">&#x27;B&#x27;</span>])</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_c</span>(<span class="params">state: State</span>):</span><br><span class="line">    <span class="keyword">return</span> State(nList=[<span class="string">&#x27;C&#x27;</span>])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义图，首先添加实线普通边</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">builder = StateGraph(State)</span><br><span class="line">builder.add_node(<span class="string">&quot;a&quot;</span>, node_a)</span><br><span class="line">builder.add_node(<span class="string">&quot;b&quot;</span>, node_b)</span><br><span class="line">builder.add_node(<span class="string">&quot;c&quot;</span>, node_c)</span><br><span class="line"></span><br><span class="line">builder.add_edge(START, <span class="string">&quot;a&quot;</span>)</span><br><span class="line">builder.add_edge(<span class="string">&quot;b&quot;</span>, END)</span><br><span class="line">builder.add_edge(<span class="string">&quot;c&quot;</span>, END)</span><br><span class="line"></span><br><span class="line">graph = builder.<span class="built_in">compile</span>()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>学习条件边的定义方法，条件边需要定义条件路由函数，该函数接受状态并返回一个值，这个值代表想要分支到的下一节点。下面定义的函数接收图最近一次写入的状态，然后返回一个值。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">conditional_edge</span>(<span class="params">state: State</span>) -&gt; <span class="type">Literal</span>[<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, END]:</span><br><span class="line">    select = state[<span class="string">&quot;nList&quot;</span>][-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> select == <span class="string">&quot;b&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;b&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;c&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;c&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;q&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> END</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> END</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在构建图时使用添加条件边的语法来添加条件边，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">builder.add_conditional_edges(<span class="string">&quot;a&quot;</span>, conditional_edge)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试条件边的逻辑。下面代码从用户那里获取输入作为初始输入状态，然后用该状态调用图表：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user = <span class="built_in">input</span>(<span class="string">&#x27;b, c or q to quit:&#x27;</span>)</span><br><span class="line">input_state = State(</span><br><span class="line">    nList=[user]</span><br><span class="line">)</span><br><span class="line">graph.invoke(input_state)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>以上就是今天的全部内容啦！内容篇幅较长，消化一下~</p>
+<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><p>本期分享为介绍了LangGraph 1.0，LangGraph1.0是构建智能体的编程语言。它通过<strong>状态（State）</strong> 管理数据，<strong>节点（Node）</strong> 作为处理函数，<strong>边（Edge）</strong> 定义串行、并行或条件执行逻辑。借助<strong>Reducer</strong>处理并行写入冲突，并支持<strong>人在回路</strong>控制。这使其成为搭建复杂、可编排AI工作流的强大底座。本期分享着重介绍了LangGraph的节点和边的定义，并用点和边构造了简单的图。然而LangGraph不仅仅有如上所示的图的定义方法，在下期分享将为介绍更多点和边的构建方法，以及介绍记忆Memory和人在回路Human In the loop，敬请期待~</p>
+</article><div class="tag_share"></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langGraph1.X快速入门2"><img class="cover" src="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">langGraph1.X快速入门2</div></div><div class="info-2"><div class="info-item-1">一、使用Command对象：边定义的第二种方法上篇内容《LangGraph1.X快速入门1》中介绍了通过 add_conditional_edges 配合条件路由函数来定义边的方法。该函数根据图的状态返回下一个节点的名称，从而实现动态路由。 12345678910111213141516...def conditional_edge(state: State) -&gt; Literal[&#x27;b&#x27;, &#x27;c&#x27;, END]:    select = state[&quot;nList&quot;][-1]    if select == &quot;b&quot;:        return &#x27;b&#x27;    elif select == &#x27;c&#x27;:        return &#x27;c&#x27;    elif select == &#x27;q&#x27;:        return END    else:        return END...builder.add_conditional_...</div></div></div></a><a class="pagination-related" href="/2026/02/08/langChain%E4%B9%8B%E5%A4%9A%E6%A8%A1%E6%80%81RAG%E5%AE%9E%E6%88%983/" title="langChain之多模态RAG实战3"><img class="cover" src="https://pic.mac89.com/icon/202509/04095147_7eca05bbf0.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">langChain之多模态RAG实战3</div></div><div class="info-2"><div class="info-item-1">前言上篇分享《LangChain之多模态RAG实战 2》中，系统探讨了如何基于 Qwen3-Omni 多模态大模型实现图片分析与音频处理的能力。作为多模态 RAG 系统的核心组成部分，对 PDF 文档的解析回答与引用溯源同样至关重要。 本文将重点介绍如何实现对上传 PDF 的结构化解析，构建具备引用溯源能力的问答系统。系统不仅能够依据文档内容进行准确回答，还将在回复中实时标注原始出处，方便用户进行信息追溯与验证。 学习前置要求：本文是系列的第三篇，强烈建议先掌握第一、二篇中介绍的项目架构、环境配置和基础代码实现，这将有助于更好地理解本文的内容。 一、多模态PDF处理流程解析1.1 标准处理流程多模态PDF文档的处理通常遵循一套标准化的流程，下面将逐步解析各个环节的关键技术与实现思路： 1.1.1 文档内容提取根据PDF文档类型的不同，可以采用差异化的提取策略：  非影印版文档：使用PyMuPDF、PyPDF2等工具直接提取文本、图片和表格内容。图片在提取后通过URL占位符进行标记，保持文档结构的完整性。 影印版&#x2F;扫描版文档：借助DeepSeek-OCR、Paddle-O...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">DaH</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的小破站鸭！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81LangGraph-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7"><span class="toc-text">一、LangGraph 核心特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%8A%B6%E6%80%81State%E5%92%8C%E8%8A%82%E7%82%B9Node"><span class="toc-text">二、状态State和节点Node</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E7%8A%B6%E6%80%81State"><span class="toc-text">2.1 状态State</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E8%8A%82%E7%82%B9"><span class="toc-text">2.2 节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BD%BF%E7%94%A8LangGraph%E6%9E%84%E5%BB%BA%E7%AE%80%E5%8D%95%E5%9B%BE"><span class="toc-text">2.3 使用LangGraph构建简单图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E8%BE%B9"><span class="toc-text">三、边</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E6%99%AE%E9%80%9A%E8%BE%B9"><span class="toc-text">3.1 普通边</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-%E6%9D%A1%E4%BB%B6%E8%BE%B9"><span class="toc-text">3.2 条件边</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-Reducer%E8%AF%A6%E8%A7%A3"><span class="toc-text">3.3 Reducer详解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-%E6%8E%A2%E7%B4%A2LangGraph%E8%BE%B9%E7%9A%84%E5%B9%B6%E8%A1%8C%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB"><span class="toc-text">3.4 探索LangGraph边的并行与数据共享</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-%E6%9D%A1%E4%BB%B6%E8%BE%B9"><span class="toc-text">3.5 条件边</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-text">四、总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/03/%E4%BB%80%E4%B9%88%E6%98%AFskills%EF%BC%9F/" title="什么是skills？"><img src="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="什么是skills？"/></a><div class="content"><a class="title" href="/2026/03/03/%E4%BB%80%E4%B9%88%E6%98%AFskills%EF%BC%9F/" title="什么是skills？">什么是skills？</a><time datetime="2026-03-03T03:22:42.000Z" title="发表于 2026-03-03 11:22:42">2026-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/02/FileSystem%E5%92%8CSandbox/" title="FileSystem和Sandbox"><img src="https://pic.mac89.com/icon/202509/15110630_dacbcccc68.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FileSystem和Sandbox"/></a><div class="content"><a class="title" href="/2026/03/02/FileSystem%E5%92%8CSandbox/" title="FileSystem和Sandbox">FileSystem和Sandbox</a><time datetime="2026-03-02T03:02:22.000Z" title="发表于 2026-03-02 11:02:22">2026-03-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/01/%E4%BB%80%E4%B9%88%E6%98%AFdeepAgents/" title="什么是 dppelAgent？"><img src="https://pic.mac89.com/icon/202509/04095147_7eca05bbf0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="什么是 dppelAgent？"/></a><div class="content"><a class="title" href="/2026/03/01/%E4%BB%80%E4%B9%88%E6%98%AFdeepAgents/" title="什么是 dppelAgent？">什么是 dppelAgent？</a><time datetime="2026-03-01T06:24:36.000Z" title="发表于 2026-03-01 14:24:36">2026-03-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/02/17/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langGraph1.X自动邮件处理智能体实战"><img src="https://pic.mac89.com/icon/202508/28142416_fb7b2e2d3c.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langGraph1.X自动邮件处理智能体实战"/></a><div class="content"><a class="title" href="/2026/02/17/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langGraph1.X自动邮件处理智能体实战">langGraph1.X自动邮件处理智能体实战</a><time datetime="2026-02-17T14:01:56.000Z" title="发表于 2026-02-17 22:01:56">2026-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langGraph1.X快速入门2"><img src="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langGraph1.X快速入门2"/></a><div class="content"><a class="title" href="/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langGraph1.X快速入门2">langGraph1.X快速入门2</a><time datetime="2026-02-16T05:49:02.000Z" title="发表于 2026-02-16 13:49:02">2026-02-16</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By DaH</span></div><div class="footer_custom_text">已经到底啦，可以点击右边的箭头直达顶部哦</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>

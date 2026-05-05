@@ -1,0 +1,270 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>langGraph1.X快速入门2 | DaH's Blog</title><meta name="author" content="DaH"><meta name="copyright" content="DaH"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、使用Command对象：边定义的第二种方法上篇内容《LangGraph1.X快速入门1》中介绍了通过 add_conditional_edges 配合条件路由函数来定义边的方法。该函数根据图的状态返回下一个节点的名称，从而实现动态路由。 12345678910111213141516...def conditional_edge(state: State) -&gt; Literal[&amp;#x2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="langGraph1.X快速入门2">
+<meta property="og:url" content="http://mrdah.github.io/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/index.html">
+<meta property="og:site_name" content="DaH&#39;s Blog">
+<meta property="og:description" content="一、使用Command对象：边定义的第二种方法上篇内容《LangGraph1.X快速入门1》中介绍了通过 add_conditional_edges 配合条件路由函数来定义边的方法。该函数根据图的状态返回下一个节点的名称，从而实现动态路由。 12345678910111213141516...def conditional_edge(state: State) -&gt; Literal[&amp;#x2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg">
+<meta property="article:published_time" content="2026-02-16T05:49:02.000Z">
+<meta property="article:modified_time" content="2026-05-05T06:00:28.347Z">
+<meta property="article:author" content="DaH">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "langGraph1.X快速入门2",
+  "url": "http://mrdah.github.io/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/",
+  "image": "https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg",
+  "datePublished": "2026-02-16T05:49:02.000Z",
+  "dateModified": "2026-05-05T06:00:28.347Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "DaH",
+      "url": "http://MrDaH.github.io"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://mrdah.github.io/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'langGraph1.X快速入门2',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">DaH's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">langGraph1.X快速入门2</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">langGraph1.X快速入门2</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2026-02-16T05:49:02.000Z" title="发表于 2026-02-16 13:49:02">2026-02-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/langGraph/">langGraph</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h3 id="一、使用Command对象：边定义的第二种方法"><a href="#一、使用Command对象：边定义的第二种方法" class="headerlink" title="一、使用Command对象：边定义的第二种方法"></a>一、使用Command对象：边定义的第二种方法</h3><p>上篇内容《LangGraph1.X快速入门1》中介绍了通过 <code>add_conditional_edges</code> 配合条件路由函数来定义边的方法。该函数根据图的状态返回下一个节点的名称，从而实现动态路由。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">conditional_edge</span>(<span class="params">state: State</span>) -&gt; <span class="type">Literal</span>[<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, END]:</span><br><span class="line">    select = state[<span class="string">&quot;nList&quot;</span>][-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> select == <span class="string">&quot;b&quot;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;b&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;c&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;c&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;q&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> END</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> END</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">builder.add_conditional_edges(<span class="string">&quot;a&quot;</span>, conditional_edge)</span><br></pre></td></tr></table></figure>
+
+<p>这是一种将<strong>路由逻辑</strong>（边）与<strong>节点执行逻辑</strong>（点）分离的清晰模式。然而，LangGraph 提供了另一种更为直接的控制流方式：允许节点函数在返回时，不仅更新状态，还能<strong>显式指定接下来要执行的节点</strong>。这是通过返回一个特殊的 <code>langgraph.types.Command</code> 对象来实现的。</p>
+<h4 id="1-1-Command-对象：将路由逻辑内置于节点"><a href="#1-1-Command-对象：将路由逻辑内置于节点" class="headerlink" title="1.1 Command 对象：将路由逻辑内置于节点"></a>1.1 <code>Command</code> 对象：将路由逻辑内置于节点</h4><p><code>Command</code> 对象主要有两个关键指令：</p>
+<ul>
+<li><strong><code>update</code></strong>: 用于更新图的状态。</li>
+<li><strong><code>goto</code></strong>: 用于指定下一个要执行的节点。</li>
+</ul>
+<p>这意味着可以在节点的处理函数内部，直接决定工作流的下一步走向，无需提前在图中定义好所有条件边。</p>
+<p>如果希望在执行其逻辑后，根据当前状态选择跳转节点B或节点C，这就需要重写<code>node_a</code>函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">node_a</span>(<span class="params">state: State</span>) -&gt; Command[<span class="type">Literal</span>[<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>, END]]:</span><br><span class="line">    select = state[<span class="string">&#x27;nList&#x27;</span>][-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> select == <span class="string">&#x27;b&#x27;</span>:</span><br><span class="line">        next_node = <span class="string">&#x27;b&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;c&#x27;</span>:</span><br><span class="line">        next_node = <span class="string">&#x27;c&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;q&#x27;</span>:</span><br><span class="line">        next_node = END</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        next_node = END</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Command(</span><br><span class="line">        update=State(nList=[select]),</span><br><span class="line">        goto=next_node</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-完整示例与执行过程分析"><a href="#1-2-完整示例与执行过程分析" class="headerlink" title="1.2 完整示例与执行过程分析"></a>1.2 完整示例与执行过程分析</h4><ol>
+<li><p>将这种思路应用到一个简单的条件图结构中，完整的代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langgraph.graph <span class="keyword">import</span> START, END, StateGraph</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> TypedDict, <span class="type">List</span>, Annotated, <span class="type">Literal</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> langgraph.types <span class="keyword">import</span> Command</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span>(<span class="title class_ inherited__">TypedDict</span>):</span><br><span class="line">    nList: Annotated[<span class="type">List</span>[<span class="built_in">str</span>], operator.add]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_a</span>(<span class="params">state: State</span>) -&gt; Command[<span class="type">Literal</span>[<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>, END]]:</span><br><span class="line">    select = state[<span class="string">&#x27;nList&#x27;</span>][-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> select == <span class="string">&#x27;b&#x27;</span>:</span><br><span class="line">        next_node = <span class="string">&#x27;b&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;c&#x27;</span>:</span><br><span class="line">        next_node = <span class="string">&#x27;c&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;q&#x27;</span>:</span><br><span class="line">        next_node = END</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        next_node = END</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Command(</span><br><span class="line">        update=State(nList=[select]),</span><br><span class="line">        goto=next_node</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_b</span>(<span class="params">state: State</span>):</span><br><span class="line">    <span class="keyword">return</span> Command(</span><br><span class="line">        goto=END</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_c</span>(<span class="params">state: State</span>):</span><br><span class="line">    <span class="keyword">return</span> Command(</span><br><span class="line">        goto=END</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">builder = StateGraph(State)</span><br><span class="line">builder.add_node(<span class="string">&quot;a&quot;</span>, node_a)</span><br><span class="line">builder.add_node(<span class="string">&quot;b&quot;</span>, node_b)</span><br><span class="line">builder.add_node(<span class="string">&quot;c&quot;</span>, node_c)</span><br><span class="line"></span><br><span class="line">builder.add_edge(START, <span class="string">&quot;a&quot;</span>)</span><br><span class="line"></span><br><span class="line">graph = builder.<span class="built_in">compile</span>()</span><br><span class="line"></span><br><span class="line">user = <span class="built_in">input</span>(<span class="string">&#x27;b, c or q to quit:&#x27;</span>)</span><br><span class="line">input_state = State(</span><br><span class="line">    nList=[user]</span><br><span class="line">)</span><br><span class="line"><span class="built_in">print</span>(graph.invoke(input_state))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行测试，分析输入 <code>&#39;b&#39;</code> 时的执行过程：</p>
+<ol>
+<li><p><strong>初始状态</strong>：<code>State(nList=[&#39;b&#39;])</code></p>
+</li>
+<li><p><strong>执行节点 A</strong>：</p>
+<ul>
+<li>读取状态 <code>nList[-1]</code>，得到 <code>&#39;b&#39;</code>。</li>
+<li>逻辑判断 <code>next_node = &#39;b&#39;</code>。</li>
+<li>返回 <code>Command(update=State(nList=[&#39;b&#39;]), goto=&#39;b&#39;)</code>。</li>
+<li><strong>状态更新</strong>：<code>update</code> 指令将 <code>[&#39;b&#39;]</code> 追加到原状态。由于 <code>reducer</code> 是 <code>operator.add</code>，状态变为 <code>nList=[&#39;b&#39;, &#39;b&#39;]</code>。</li>
+</ul>
+</li>
+<li><p><strong>跳转与执行</strong>：根据 <code>goto=&#39;b&#39;</code>，图跳转到节点 B。</p>
+</li>
+<li><p><strong>执行节点 B</strong>：节点 B 返回 <code>Command(goto=END)</code>，图运行结束。</p>
+</li>
+<li><p><strong>最终输出状态</strong>：<code>{&#39;nList&#39;: [&#39;b&#39;, &#39;b&#39;]}</code>。</p>
+</li>
+<li><p>输入 <code>&#39;c&#39;</code> 或其它字符（如 <code>&#39;q&#39;</code>）的逻辑类似，最终状态会分别为 <code>[&#39;c&#39;, &#39;c&#39;]</code> 或 <code>[&#39;q&#39;]</code>。</p>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="1-3-方法对比选型"><a href="#1-3-方法对比选型" class="headerlink" title="1.3 方法对比选型"></a>1.3 方法对比选型</h4><p>虽然 <code>Command</code> 对象提供了强大的、由节点驱动流程的能力，但在大多数智能体工作流的设计中，<strong>更推荐使用 <code>add_conditional_edges</code> 配合条件路由函数的方式来定义边</strong>。</p>
+<p>主要原因在于“<strong>关注点分离</strong>”和“<strong>可维护性</strong>”。将“做什么”（节点逻辑）和“接下来去哪”（路由逻辑）分开定义，使得图的结构更加清晰、易于理解和调试。图的<code>builder</code>本身就能完整反映业务逻辑的流转，而不是将控制流隐藏在节点的实现细节里。</p>
+<p>因此，<code>Command</code> 方案更适合作为一种高级或特定场景下的补充手段，而在构建清晰、可维护的 LangGraph 应用时，应优先考虑使用条件边函数来定义路由。</p>
+<h3 id="二、Memory：实现智能体的长期记忆"><a href="#二、Memory：实现智能体的长期记忆" class="headerlink" title="二、Memory：实现智能体的长期记忆"></a>二、Memory：实现智能体的长期记忆</h3><p>在 LangGraph 的工作流中，节点按顺序执行，状态随之更新。然而，这种状态默认只存在于单次调用（<code>invoke</code>）的生命周期内。为了让智能体像人类一样拥有“记忆”，能够在多次交互中记住上下文（例如，像在 DeepSeek 网页中进行的多轮对话），LangGraph 提供了<strong>检查点（Checkpoint）</strong> 机制。</p>
+<h4 id="2-1-理解检查点：状态快照与线程"><a href="#2-1-理解检查点：状态快照与线程" class="headerlink" title="2.1 理解检查点：状态快照与线程"></a>2.1 理解检查点：状态快照与线程</h4><p><strong>检查点</strong>是 LangGraph 实现记忆功能的核心。它本质上是在图运行的<strong>关键步骤（如每个节点执行后）</strong>  对当前完整状态进行的一次快照（Snapshot），并将其持久化存储。这个过程类似于为虚拟机保存恢复点。</p>
+<p>而这些按时间顺序排列的检查点集合，构成了一个<strong>线程（Thread）</strong> 。在线程中，每次<code>graph.invoke</code>调用的历史记录都被完整保存。这解释了为何在 DeepSeek 中，“新对话”会开启一个没有历史的纯净会话——因为它开启了一个新的线程。</p>
+<p><strong>检查点的核心优势：</strong></p>
+<p>引入检查点机制为智能体开发带来了如下关键能力：</p>
+<ol>
+<li><strong>状态持久化</strong>：即使图停止运行，状态也能被保留，下次可从断点恢复。</li>
+<li><strong>错误恢复与重试</strong>：当某个节点执行失败时，可以从上一个检查点恢复状态并重试，避免丢失全部进度。</li>
+<li><strong>时间旅行与回滚</strong>：如果发现智能体在长期运行后“跑偏”，可以回滚到任意历史检查点，并从该健康状态重新开始。</li>
+<li><strong>暂停与继续</strong>：可以暂停一个长时间运行的任务，并在之后准确地从中断处继续执行。</li>
+</ol>
+<h4 id="2-2-实战：使用内存检查点器"><a href="#2-2-实战：使用内存检查点器" class="headerlink" title="2.2 实战：使用内存检查点器"></a>2.2 实战：使用内存检查点器</h4><p>LangGraph 提供了多种检查点存储后端，包括内存 (<code>InMemorySaver</code>)、Postgres数据库等。本篇分享以最简单的内存检查点器为例进行演示。</p>
+<ol>
+<li><p><strong>构建基础图：</strong> 复用上一节中基于 <code>Command</code> 对象的路由图结构。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langgraph.graph <span class="keyword">import</span> START, END, StateGraph</span><br><span class="line"><span class="keyword">import</span> operator</span><br><span class="line"><span class="keyword">from</span> typing <span class="keyword">import</span> TypedDict, <span class="type">List</span>, Annotated, <span class="type">Literal</span></span><br><span class="line"><span class="keyword">from</span> langgraph.types <span class="keyword">import</span> Command</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span>(<span class="title class_ inherited__">TypedDict</span>):</span><br><span class="line">    nList: Annotated[<span class="type">List</span>[<span class="built_in">str</span>], operator.add]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_a</span>(<span class="params">state: State</span>) -&gt; Command[<span class="type">Literal</span>[<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>, END]]:</span><br><span class="line">    select = state[<span class="string">&#x27;nList&#x27;</span>][-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> select == <span class="string">&#x27;b&#x27;</span>:</span><br><span class="line">        next_node = <span class="string">&#x27;b&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;c&#x27;</span>:</span><br><span class="line">        next_node = <span class="string">&#x27;c&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;q&#x27;</span>:</span><br><span class="line">        next_node = END</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        next_node = END</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Command(</span><br><span class="line">        update=State(nList=[select]),</span><br><span class="line">        goto=next_node</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_b</span>(<span class="params">state: State</span>):</span><br><span class="line">    <span class="keyword">return</span> Command(</span><br><span class="line">        goto=END</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">node_c</span>(<span class="params">state: State</span>):</span><br><span class="line">    <span class="keyword">return</span> Command(</span><br><span class="line">        goto=END</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">builder = StateGraph(State)</span><br><span class="line">builder.add_node(<span class="string">&quot;a&quot;</span>, node_a)</span><br><span class="line">builder.add_node(<span class="string">&quot;b&quot;</span>, node_b)</span><br><span class="line">builder.add_node(<span class="string">&quot;c&quot;</span>, node_c)</span><br><span class="line"></span><br><span class="line">builder.add_edge(START, <span class="string">&quot;a&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p><strong>引入内存检查点器：</strong> 从 <code>langgraph.checkpoint.memory</code> 导入 <code>InMemorySaver</code>，并实例化。<code>config</code> 中的 <code>thread_id</code> 是关键，它标识了会话线程。相同 <code>thread_id</code> 下的所有调用将共享状态历史。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langgraph.checkpoint.memory <span class="keyword">import</span> InMemorySaver</span><br><span class="line"></span><br><span class="line">memory = InMemorySaver()</span><br><span class="line"></span><br><span class="line">config = &#123;</span><br><span class="line">    <span class="string">&quot;configurable&quot;</span>:&#123;</span><br><span class="line">        <span class="string">&quot;thread_id&quot;</span>, <span class="string">&quot;1&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>编译时启用检查点：</strong> 在编译图时，通过 <code>checkpointer</code> 参数传入检查点器实例。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">graph = builder.<span class="built_in">compile</span>(checkpointer=memory)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>在循环调用中体验记忆：</strong> 现在通过一个循环来模拟多轮交互。关键在于，每次调用 <code>graph.invoke</code> 时都传入相同的 <code>config</code>，这样 LangGraph 就会自动加载该线程 (<code>thread_id=’1’</code>) 的上一次状态，并在执行后保存新状态。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    user = <span class="built_in">input</span>(<span class="string">&#x27;b, c or q to quit:&#x27;</span>)</span><br><span class="line">    input_state = State(</span><br><span class="line">        nList=[user]</span><br><span class="line">    )</span><br><span class="line">    result = graph.invoke(input_state, config)</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line">    <span class="keyword">if</span> result[<span class="string">&#x27;nList&#x27;</span>][-<span class="number">1</span>] == <span class="string">&#x27;q&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;quit&#x27;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>运行测试：</strong> 输入序列：<code>b → c → b → q</code>，<strong>执行过程解析：</strong></p>
+<ul>
+<li><strong>第一轮 (<code>输入b</code>)</strong> ：初始状态 <code>[‘b’]</code>。节点A执行后更新状态为 <code>[‘b’, ‘b’]</code> 并跳转到节点B，最终状态为 <code>[‘b’, ‘b’]</code>。</li>
+<li><strong>第二轮 (<code>输入c</code>)</strong> ：由于检查点存在，<strong>初始状态并非空列表，而是上一轮的最终状态 <code>[‘b’, ‘b’]</code></strong> 。输入<code>c</code>后，状态会累积到<code>[&#39;b&#39;,&#39;b&#39;,&#39;c&#39;,&#39;c&#39;]</code></li>
+<li><strong>第三轮 (<code>输入b</code>)</strong> ：状态继续累积。</li>
+<li><strong>第四轮 (<code>输入q</code>)</strong> ：触发退出。</li>
+</ul>
+</li>
+<li><p>通过简单的几步配置,LangGraph图即可具备“记忆”能力。<code>thread_id</code> 是管理不同记忆会话的钥匙。只要使用相同的 <code>thread_id</code>，智能体就能在多次调用间保持并累积状态。对于生产环境，只需将 <code>InMemorySaver</code> 替换为 <code>PostgresSaver</code> 或自定义的持久化检查点器，即可实现稳定可靠的长期记忆。</p>
+</li>
+</ol>
+<h3 id="三、中断与人在回路"><a href="#三、中断与人在回路" class="headerlink" title="三、中断与人在回路"></a>三、中断与人在回路</h3><p>在许多实际场景中需要在智能体工作流的关键节点引入人工判断。例如，在大模型调用工具执行数据库写操作、发送邮件或进行其他高风险动作前，必须由人工确认。LangGraph 通过<strong>中断（Interrupt）</strong>  机制优雅地支持了这种“人在回路（Human-in-the-loop）”模式。</p>
+<p>中断允许一个正在运行的图在特定节点暂停，将控制权交还给外部程序（通常是等待用户输入），然后根据外部输入的结果决定如何恢复执行。这个强大的功能同样建立在之前介绍的<strong>检查点（Checkpoint）</strong>  机制之上。</p>
+<h4 id="3-1-核心概念：interrupt-与-Command-resume"><a href="#3-1-核心概念：interrupt-与-Command-resume" class="headerlink" title="3.1 核心概念：interrupt 与 Command(resume=...)"></a>3.1 核心概念：<code>interrupt</code> 与 <code>Command(resume=...)</code></h4><p>继续改造之前使用的条件路由图。核心改动在于，当节点 <code>A</code> 遇到无法处理的输入时，不再直接结束，而是<strong>主动引发一个中断</strong>，等待外部干预。</p>
+<p><strong>实现中断需要两个关键操作：</strong></p>
+<ol>
+<li><strong>在节点内引发中断</strong>：使用 <code>interrupt()</code> 函数。这会抛出一个特殊信号，使图立即暂停运行，并将包含中断信息的快照保存到检查点中。</li>
+<li><strong>从外部恢复执行</strong>：向图中发送一个带有 <code>resume</code> 指令的 <code>Command</code> 对象。这个指令的值会传递回引发中断的节点，作为其 <code>interrupt()</code> 调用的返回值，从而使节点得以继续执行。</li>
+</ol>
+<h3 id="3-2-示例：中断代码实战"><a href="#3-2-示例：中断代码实战" class="headerlink" title="3.2 示例：中断代码实战"></a>3.2 示例：中断代码实战</h3><ol>
+<li><p>对之前的 <code>node_a</code> 进行修改。当用户输入不是预期的 <code>‘b’</code>， <code>‘c’</code> 或 <code>‘q’</code> 时，触发中断。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">node_a</span>(<span class="params">state: State</span>) -&gt; Command[<span class="type">Literal</span>[<span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, END]]:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;进入 A 节点&#x27;</span>)</span><br><span class="line">    select = state[<span class="string">&#x27;nList&#x27;</span>][-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">if</span> select == <span class="string">&#x27;b&#x27;</span>:</span><br><span class="line">        next_node = <span class="string">&#x27;b&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;c&#x27;</span>:</span><br><span class="line">        next_node = <span class="string">&#x27;c&#x27;</span></span><br><span class="line">    <span class="keyword">elif</span> select == <span class="string">&#x27;q&#x27;</span>:</span><br><span class="line">        next_node = END</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        admin = interrupt(<span class="string">f&quot;未期望的输出 <span class="subst">&#123;select&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;用户重新输入是:&#x27;</span>,admin)</span><br><span class="line">        <span class="keyword">if</span> admin == <span class="string">&#x27;continue&#x27;</span>:</span><br><span class="line">            next_node = <span class="string">&#x27;b&#x27;</span></span><br><span class="line">            select = <span class="string">&#x27;b&#x27;</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            next_node = END</span><br><span class="line">            select = <span class="string">&#x27;q&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Command(</span><br><span class="line">        update=State(nList=[select]),</span><br><span class="line">        goto=next_node</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构建图并启用检查点，中断依赖检查点来保存和恢复状态，因此必须配置检查点器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> langgraph.graph <span class="keyword">import</span> START, END, StateGraph</span><br><span class="line"><span class="keyword">from</span> langgraph.checkpoint.memory <span class="keyword">import</span> InMemorySaver</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建图</span></span><br><span class="line">builder = StateGraph(State)</span><br><span class="line">builder.add_node(<span class="string">&quot;a&quot;</span>, node_a)</span><br><span class="line">builder.add_node(<span class="string">&quot;b&quot;</span>, node_b)</span><br><span class="line">builder.add_node(<span class="string">&quot;c&quot;</span>, node_c)</span><br><span class="line">builder.add_edge(START, <span class="string">&quot;a&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置内存检查点器和线程</span></span><br><span class="line">memory = InMemorySaver()</span><br><span class="line">config = &#123;<span class="string">&quot;configurable&quot;</span>: &#123;<span class="string">&quot;thread_id&quot;</span>: <span class="string">&quot;1&quot;</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编译时传入检查点器</span></span><br><span class="line">graph = builder.<span class="built_in">compile</span>(checkpointer=memory)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现外部中断处理循环:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    user = <span class="built_in">input</span>(<span class="string">&#x27;b, c or q to quit:&#x27;</span>)</span><br><span class="line">    input_state = State(</span><br><span class="line">        nList=[user]</span><br><span class="line">    )</span><br><span class="line">    result = graph.invoke(input_state, config)</span><br><span class="line">    <span class="built_in">print</span>(result)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;__interrupt__&#x27;</span> <span class="keyword">in</span> result:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;Interrupt:<span class="subst">&#123;result&#125;</span>&#x27;</span>)</span><br><span class="line">        msg = result[<span class="string">&#x27;__interrupt__&#x27;</span>][-<span class="number">1</span>].value</span><br><span class="line">        <span class="built_in">print</span>(msg)</span><br><span class="line">        human = <span class="built_in">input</span>(<span class="string">f&quot;\n<span class="subst">&#123;msg&#125;</span>, 重新输入: &quot;</span>)</span><br><span class="line">        human_response = Command(</span><br><span class="line">            resume=human</span><br><span class="line">        )</span><br><span class="line">        result = graph.invoke(human_response, config)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> result[<span class="string">&#x27;nList&#x27;</span>][-<span class="number">1</span>] == <span class="string">&#x27;q&#x27;</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;quit&#x27;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行结果分析：假设输入 <code>p</code>（一个非法值），流程如下：</p>
+<ul>
+<li><strong>触发中断</strong>：节点A识别到 <code>p</code>，调用 <code>interrupt(“未预期的输入...”</code>。图在此刻<strong>立即暂停</strong>，并将当前状态（包括中断信息）保存为检查点。<code>graph.invoke</code> 返回的结果中会包含一个特殊的 <code>__interrupt__</code> 字段。</li>
+<li><strong>人工干预</strong>：外部循环检测到中断，打印信息并等待用户输入。用户输入 <code>continue</code>。</li>
+<li><strong>恢复执行</strong>：外部程序构建一个 <code>Command(resume=’continue’)</code> 并再次调用 <code>graph.invoke</code>。<strong>关键点</strong>：因为使用了相同的 <code>thread_id</code>，图会从上一个检查点（即中断处）恢复。</li>
+<li><strong>节点继续运行</strong>：恢复后，节点A中 <code>interrupt()</code> 调用处将返回 <code>admin_decision = ‘continue’</code>。程序流程进入 <code>if admin_decision == &#39;continue&#39;</code> 分支，最终前往节点B并结束。</li>
+</ul>
+<p><strong>重要说明</strong>：当图从中断点恢复时，整个图会重新执行。但由于检查点保存了中断前的状态（包括 <code>nList</code>），并且 <code>interrupt()</code> 会返回新的 <code>resume</code> 值，因此节点能基于新信息做出不同的决策。<code>__interrupt__</code> 是一个列表，因为一个图可以在不同节点触发多个中断，LangGraph 会跟踪所有中断的上下文。</p>
+</li>
+</ol>
+<h3 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h3><p>本期文章深入讲解了 LangGraph 1.X 的三大进阶功能：<strong>条件边</strong>（除条件函数外，还能通过 Command 对象实现节点内路由）、<strong>记忆</strong>（利用检查点机制实现状态持久化与多轮对话能力）以及<strong>人在回路</strong>（通过中断机制在关键节点引入人工干预）。</p>
+</article><div class="tag_share"></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2026/02/17/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langGraph1.X自动邮件处理智能体实战"><img class="cover" src="https://pic.mac89.com/icon/202508/28142416_fb7b2e2d3c.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">langGraph1.X自动邮件处理智能体实战</div></div><div class="info-2"><div class="info-item-1">一、电子邮件智能体场景分析1.1 需求分析作为一名开发者每天都需要处理大量的工作邮件——包括问题咨询、Bug 报告、账单通知、功能请求等。邮件不仅类型多样，紧急程度也各不相同，手动分类、回复耗时耗力，尤其在忙碌时更容易遗漏或延迟处理。为此希望构建一个自动邮件处理智能体，它能够：  自动分类：识别邮件的类型（如问题、Bug、账单、功能请求等）与紧急程度。 智能处理：根据邮件类型执行相应操作（如为 Bug 创建跟踪工单，为其他问题搜索内部文档获取解答）。 自动生成回复：基于分类与处理结果，生成有针对性的回复内容。 审核机制：在必要时（如涉及重要决策或复杂问题）暂停流程，引入人工审核，确保回复准确性与安全性。  该智能体将帮助提升邮件处理效率，同时通过“人在回路”保证对自动回复的可控制。 1.2 根据需求分析设计图基于以上需求设计的智能体将具备以下核心功能流程：  邮件提取与解析：从收件箱获取原始邮件，提取关键内容（发件人、主题、正文等）。  自动分类与路由：对邮件内容进行分类，并依据类别决定后续处理路径。  内容处理与生成：  若为 Bug 报告，在错误跟踪系统中说明已经收到并跟踪错...</div></div></div></a><a class="pagination-related" href="/2026/02/15/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A81/" title="langGraph1.X快速入门 1"><img class="cover" src="https://pic.mac89.com/icon/202509/03114700_25dbf65456.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">langGraph1.X快速入门 1</div></div><div class="info-2"><div class="info-item-1">一、LangGraph 核心特性LangGraph 是一个极其灵活的框架，其核心设计理念可以概括为：它是一种用于构建智能体的“编程语言” 。 如同任何编程语言都包含数据、函数、控制流等基本要素一样，LangGraph 也提供了功能对等的抽象组件，使开发者能够以声明式的方式编排智能体工作流。其核心特性的对应关系如下：    编程语言要素 LangGraph 对应概念 说明    数据 (Data) 状态 (State) 工作流执行过程中传递和更新的信息载体。   函数 (Function) 节点 (Node) 对状态进行操作（如调用模型、执行工具）的基本单元。   控制逻辑 (Control Flow) 边 (Edge) 决定节点间执行顺序的逻辑，可以是条件分支或静态路径，支持串行与并行。   存储 (Storage) 检查点 &#x2F; 记忆 (Checkpointing &#x2F; Memory) 状态的持久化机制，允许工作流暂停、恢复或具有长期记忆。   中断 (Interrupt) 人在回路 (Human-in-the-Loop) 通过中断控制流，在关键环节引入人工审核...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">DaH</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的小破站鸭！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8Command%E5%AF%B9%E8%B1%A1%EF%BC%9A%E8%BE%B9%E5%AE%9A%E4%B9%89%E7%9A%84%E7%AC%AC%E4%BA%8C%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="toc-text">一、使用Command对象：边定义的第二种方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-1-Command-%E5%AF%B9%E8%B1%A1%EF%BC%9A%E5%B0%86%E8%B7%AF%E7%94%B1%E9%80%BB%E8%BE%91%E5%86%85%E7%BD%AE%E4%BA%8E%E8%8A%82%E7%82%B9"><span class="toc-text">1.1 Command 对象：将路由逻辑内置于节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-2-%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B%E4%B8%8E%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-text">1.2 完整示例与执行过程分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94%E9%80%89%E5%9E%8B"><span class="toc-text">1.3 方法对比选型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Memory%EF%BC%9A%E5%AE%9E%E7%8E%B0%E6%99%BA%E8%83%BD%E4%BD%93%E7%9A%84%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86"><span class="toc-text">二、Memory：实现智能体的长期记忆</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E7%90%86%E8%A7%A3%E6%A3%80%E6%9F%A5%E7%82%B9%EF%BC%9A%E7%8A%B6%E6%80%81%E5%BF%AB%E7%85%A7%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="toc-text">2.1 理解检查点：状态快照与线程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-%E5%AE%9E%E6%88%98%EF%BC%9A%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98%E6%A3%80%E6%9F%A5%E7%82%B9%E5%99%A8"><span class="toc-text">2.2 实战：使用内存检查点器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%B8%AD%E6%96%AD%E4%B8%8E%E4%BA%BA%E5%9C%A8%E5%9B%9E%E8%B7%AF"><span class="toc-text">三、中断与人在回路</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%EF%BC%9Ainterrupt-%E4%B8%8E-Command-resume"><span class="toc-text">3.1 核心概念：interrupt 与 Command(resume&#x3D;...)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E7%A4%BA%E4%BE%8B%EF%BC%9A%E4%B8%AD%E6%96%AD%E4%BB%A3%E7%A0%81%E5%AE%9E%E6%88%98"><span class="toc-text">3.2 示例：中断代码实战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-text">四、总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/03/%E4%BB%80%E4%B9%88%E6%98%AFskills%EF%BC%9F/" title="什么是skills？"><img src="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="什么是skills？"/></a><div class="content"><a class="title" href="/2026/03/03/%E4%BB%80%E4%B9%88%E6%98%AFskills%EF%BC%9F/" title="什么是skills？">什么是skills？</a><time datetime="2026-03-03T03:22:42.000Z" title="发表于 2026-03-03 11:22:42">2026-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/02/FileSystem%E5%92%8CSandbox/" title="FileSystem和Sandbox"><img src="https://pic.mac89.com/icon/202509/15110630_dacbcccc68.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FileSystem和Sandbox"/></a><div class="content"><a class="title" href="/2026/03/02/FileSystem%E5%92%8CSandbox/" title="FileSystem和Sandbox">FileSystem和Sandbox</a><time datetime="2026-03-02T03:02:22.000Z" title="发表于 2026-03-02 11:02:22">2026-03-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/01/%E4%BB%80%E4%B9%88%E6%98%AFdeepAgents/" title="什么是 dppelAgent？"><img src="https://pic.mac89.com/icon/202509/04095147_7eca05bbf0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="什么是 dppelAgent？"/></a><div class="content"><a class="title" href="/2026/03/01/%E4%BB%80%E4%B9%88%E6%98%AFdeepAgents/" title="什么是 dppelAgent？">什么是 dppelAgent？</a><time datetime="2026-03-01T06:24:36.000Z" title="发表于 2026-03-01 14:24:36">2026-03-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/02/17/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langGraph1.X自动邮件处理智能体实战"><img src="https://pic.mac89.com/icon/202508/28142416_fb7b2e2d3c.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langGraph1.X自动邮件处理智能体实战"/></a><div class="content"><a class="title" href="/2026/02/17/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langGraph1.X自动邮件处理智能体实战">langGraph1.X自动邮件处理智能体实战</a><time datetime="2026-02-17T14:01:56.000Z" title="发表于 2026-02-17 22:01:56">2026-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langGraph1.X快速入门2"><img src="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langGraph1.X快速入门2"/></a><div class="content"><a class="title" href="/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langGraph1.X快速入门2">langGraph1.X快速入门2</a><time datetime="2026-02-16T05:49:02.000Z" title="发表于 2026-02-16 13:49:02">2026-02-16</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By DaH</span></div><div class="footer_custom_text">已经到底啦，可以点击右边的箭头直达顶部哦</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>

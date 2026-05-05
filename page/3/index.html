@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>DaH's Blog</title><meta name="author" content="DaH"><meta name="copyright" content="DaH"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="DaH&#39;s Blog">
+<meta property="og:url" content="http://mrdah.github.io/page/3/index.html">
+<meta property="og:site_name" content="DaH&#39;s Blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://mrdah.github.io/img/touxiang.jpg">
+<meta property="article:author" content="DaH">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://mrdah.github.io/img/touxiang.jpg"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://mrdah.github.io/page/3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css?v=5.5.4"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.13.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'DaH\'s Blog',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'home'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(/img/top1.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">DaH's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="site-info"><h1 id="site-title">DaH's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="post_cover left"><a href="/2026/02/04/langChain%E4%B9%8BRAG%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A81/" title="langChain之RAG快速入门1"><img class="post-bg" src="https://pic.mac89.com/icon/202509/04095147_7eca05bbf0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langChain之RAG快速入门1"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/02/04/langChain%E4%B9%8BRAG%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A81/" title="langChain之RAG快速入门1">langChain之RAG快速入门1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-04T02:38:08.000Z" title="发表于 2026-02-04 10:38:08">2026-02-04</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/langChain/">langChain</a></span></div><div class="content">一、RAG简介1.1 定义RAG（Retrieval-Augmented Generation）检索增强生成。  检索指的是从外部知识库中查找与用户查询相关的信息 增强指的是将检索到的这些有效信息作为补充输入 生成指的是在补充信息的支撑下，生成符合用户需求的回答  所以 RAG 相当于AI的查资料工具，让它回答问题时 “有据可依”，不再靠 “脑补”。 1.2 作用   没有RAG存在的问题 RAG的解决方案    静态知识局限 实时检索外部知识库，支持动态更新   幻觉 基于检索内容生成，错误率降低   领域专业性不足 引入领域特定知识库（如医疗&#x2F;法律）   数据隐私风险 本地化部署知识库，避免敏感数据泄露   1.3 流程提问前：分片、索引 提问后：召回、重排、生成    操作 解释    分片 把海量长文档切成短小的文本片段   索引 给这些片段打上标签、建立检索目录   召回 根据用户问题，从索引里找出一批最相关的文本片段   重排 给这些片段按匹配度打分排序，筛选出最核心的内容   生成 模型结合排序后的优质片段和问题，输出准确有依据的回答   数据源 → 分片...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/02/03/langChain1.0%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langChain1.0快速入门3"><img class="post-bg" src="https://pic.mac89.com/icon/202509/03114700_25dbf65456.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langChain1.0快速入门3"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/02/03/langChain1.0%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langChain1.0快速入门3">langChain1.0快速入门3</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-03T06:39:44.000Z" title="发表于 2026-02-03 14:39:44">2026-02-03</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/langChain/">langChain</a></span></div><div class="content">一、Tools With MCP除了使用@tool装饰器自定义工具函数并将其接入 create_agent API。除了这种方法，LangChain 还支持集成当前备受关注的 MCP（Model Context Protocol）协议。 1.1 认识 MCP 协议MCP 是一个开放协议，它在大模型和外部应用程序之间定义了一套标准化的接口规范。通过 MCP，开发者可以将自己编写的功能封装成 MCP 服务并分享，其他开发者则可以快速集成和复用这些功能，实现了工具的“即插即用”。 LangChain 作为领先的大模型开发框架，对 MCP 提供了良好的支持。其核心集成流程与之前介绍的工具函数接入方式相似：模型仍然会获得工具函数的详细使用说明（类似于自定义函数的文档字符串），但这些描述信息是通过与 MCP 服务器的协议通信获取的。不同的是，工具的执行不再发生在本地函数节点，而是在代理请求时由 MCP 服务器执行并返回结果。 1.2 实战：构建高德地图智能规划助手下面通过使用 create_agent 接入高德地图 MCP 服务的完整案例，来学习如何在 LangChain 中使用 MCP。 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2026/02/02/langChain1.0%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langChain1.0快速入门2"><img class="post-bg" src="https://pic.mac89.com/icon/202508/28142416_fb7b2e2d3c.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langChain1.0快速入门2"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/02/02/langChain1.0%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langChain1.0快速入门2">langChain1.0快速入门2</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-02T00:07:35.000Z" title="发表于 2026-02-02 08:07:35">2026-02-02</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/langChain/">langChain</a></span></div><div class="content">一、环境搭建LangChain 1.0 的环境搭建过程较为简单。推荐使用 anaconda 创建一个新的虚拟环境（这里命名为 langchainenvnew），并建议将 Python 版本设置为 3.12 。创建环境的命令如下： 1conda create -n langchainenvnew python=3.12   环境创建完成后，安装本实验所需的依赖包。请执行以下命令： 1pip install -u langchain langchain-community langchain-deepseek  完成上述步骤后环境准备就绪，接下来开始编写今天的代码。 二、create_agent三要素：提示词，大模型和工具函数 首先导入代码所需依赖，并通过自定义函数的方式编写一个模拟天气查询函数，注意工具函数必须包含清晰的函数说明，这是大模型判断是否调用自定义函数的重要依据。从依赖包的导入方式可以看出langchain的依赖包命名更加简洁明了。 12345678910from langchain.chat_models import init_chat_modelfrom langc...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2026/02/01/langchain1.0%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A81/" title="langchain1.0快速入门1"><img class="post-bg" src="https://pic.mac89.com/icon/202509/15110630_dacbcccc68.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langchain1.0快速入门1"></a></div><div class="recent-post-info"><a class="article-title" href="/2026/02/01/langchain1.0%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A81/" title="langchain1.0快速入门1">langchain1.0快速入门1</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2026-02-01T04:00:00.000Z" title="发表于 2026-02-01 12:00:00">2026-02-01</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/langChain/">langChain</a></span></div><div class="content">LangChain 1.0 是一个里程碑式的重大更新，标志着该框架进入了成熟稳定的发展阶段。此版本的核心目标是简化开发流程、统一API标准，并增强生产环境下的可控性与稳定性。 为了让你对本次更新的核心变化有一个快速的全局了解，我准备了下述表格。    维度 LangChain 旧版 (0.x) LangChain 1.0 核心价值    架构理念 链式(Chain)为主，架构臃肿 **智能体(Agent)**为核心，全面统一和简化 聚焦主流场景，降低认知负担   核心API 几十种细分的Agent创建API 统一为 create_agent() 单一函数 简化构建流程，10行代码创建生产级Agent   底层引擎 LangChain与LangGraph独立 LangGraph作为底层运行时，LangChain封装上层API 获得状态管理、持久化等生产级能力   可控性 传统ReAct智能体如同黑箱，难以干预 引入Middleware（中间件）机制，支持全流程干预 打破黑箱，实现日志、审计、人为审批等精细控制   消息格式 多样，未完全统一 标准化消息块 (如HumanMessag...</div></div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#content-inner">2</a><span class="page-number current">3</span></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/touxiang.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">DaH</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">14</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的小破站鸭！</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/03/03/%E4%BB%80%E4%B9%88%E6%98%AFskills%EF%BC%9F/" title="什么是skills？"><img src="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="什么是skills？"/></a><div class="content"><a class="title" href="/2026/03/03/%E4%BB%80%E4%B9%88%E6%98%AFskills%EF%BC%9F/" title="什么是skills？">什么是skills？</a><time datetime="2026-03-03T03:22:42.000Z" title="发表于 2026-03-03 11:22:42">2026-03-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/02/FileSystem%E5%92%8CSandbox/" title="FileSystem和Sandbox"><img src="https://pic.mac89.com/icon/202509/15110630_dacbcccc68.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="FileSystem和Sandbox"/></a><div class="content"><a class="title" href="/2026/03/02/FileSystem%E5%92%8CSandbox/" title="FileSystem和Sandbox">FileSystem和Sandbox</a><time datetime="2026-03-02T03:02:22.000Z" title="发表于 2026-03-02 11:02:22">2026-03-02</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/03/01/%E4%BB%80%E4%B9%88%E6%98%AFdeepAgents/" title="什么是 dppelAgent？"><img src="https://pic.mac89.com/icon/202509/04095147_7eca05bbf0.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="什么是 dppelAgent？"/></a><div class="content"><a class="title" href="/2026/03/01/%E4%BB%80%E4%B9%88%E6%98%AFdeepAgents/" title="什么是 dppelAgent？">什么是 dppelAgent？</a><time datetime="2026-03-01T06:24:36.000Z" title="发表于 2026-03-01 14:24:36">2026-03-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/02/17/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langGraph1.X自动邮件处理智能体实战"><img src="https://pic.mac89.com/icon/202508/28142416_fb7b2e2d3c.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langGraph1.X自动邮件处理智能体实战"/></a><div class="content"><a class="title" href="/2026/02/17/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A83/" title="langGraph1.X自动邮件处理智能体实战">langGraph1.X自动邮件处理智能体实战</a><time datetime="2026-02-17T14:01:56.000Z" title="发表于 2026-02-17 22:01:56">2026-02-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langGraph1.X快速入门2"><img src="https://pic.mac89.com/icon/202509/03104359_a65627fced.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="langGraph1.X快速入门2"/></a><div class="content"><a class="title" href="/2026/02/16/langGraph1-X%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A82/" title="langGraph1.X快速入门2">langGraph1.X快速入门2</a><time datetime="2026-02-16T05:49:02.000Z" title="发表于 2026-02-16 13:49:02">2026-02-16</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 - 2026 By DaH</span></div><div class="footer_custom_text">已经到底啦，可以点击右边的箭头直达顶部哦</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.4"></script><script src="/js/main.js?v=5.5.4"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+  init: str => {
+    window.typed = new Typed('#subtitle', Object.assign({
+      strings: str,
+      startDelay: 300,
+      typeSpeed: 150,
+      loop: true,
+      backSpeed: 50,
+    }, null))
+  },
+  run: subtitleType => {
+    if (true) {
+      if (typeof Typed === 'function') {
+        subtitleType()
+      } else {
+        btf.getScript('https://cdn.jsdelivr.net/npm/typed.js@3.0.0/dist/typed.umd.min.js').then(subtitleType)
+      }
+    } else {
+      subtitleType()
+    }
+  },
+  processSubtitle: (content, extraContents = []) => {
+    if (true) {
+      const sub = [].slice()
+
+      if (extraContents.length > 0) {
+        sub.unshift(...extraContents)
+      }
+
+      if (typeof content === 'string') {
+        sub.unshift(content)
+      } else if (Array.isArray(content)) {
+        sub.unshift(...content)
+      }
+
+      sub.length > 0 && typedJSFn.init(sub)
+    } else {
+      document.getElementById('subtitle').textContent = typeof content === 'string' ? content :
+        (Array.isArray(content) && content.length > 0 ? content[0] : '')
+    }
+  }
+}
+btf.addGlobalFn('pjaxSendOnce', () => { typed.destroy() }, 'typedDestroy')
+</script><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      const from = '出自 ' + data.from
+      typedJSFn.processSubtitle(data.hitokoto, [from])
+    })
+    .catch(err => {
+      console.error('Failed to get the Hitokoto API:', err)
+      typedJSFn.processSubtitle([])
+    })
+}
+typedJSFn.run(subtitleType)
+</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/dist/click-heart.min.js" async="async" mobile="false"></script></div></body></html>
